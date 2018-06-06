@@ -1,3 +1,4 @@
+import hash from './hash.js';
 import c from './console.js';
 
 export default class movie {
@@ -6,15 +7,15 @@ export default class movie {
 		this.chars = chars;
 		this.titles = [];
 		for ( const title of titles ) {
-			this.titles.push( this._normalize(title) );
+			this.titles.push(title);
 		}
 		this.year = year;
 	}
 	
 	check(text) {
-		const normalized = this._normalize(text);
+		const hashed = hash(text);
 		for ( const title of this.titles ) {
-			if ( title === normalized ) {
+			if ( title === hashed ) {
 				return true;
 			}
 		}
@@ -35,12 +36,6 @@ export default class movie {
 	
 	getYear() {
 		return String(this.year);
-	}
-	
-	_normalize(text) {
-		text = text.toLowerCase();
-		text = text.replace(/[^0-9a-zа-яё]/g, '');
-		return text;
 	}
 	
 }
