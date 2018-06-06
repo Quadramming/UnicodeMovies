@@ -15,6 +15,3 @@ build/
 
 # Assets
 assets/
-
-# Package lock
-package-lock.json
