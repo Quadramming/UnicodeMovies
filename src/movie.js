@@ -1,7 +1,7 @@
 import hash from './hash.js';
 import c from './console.js';
 
-export default class movie {
+export default class {
 	
 	constructor([chars, year, titles]) {
 		this.chars = chars;

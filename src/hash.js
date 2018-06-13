@@ -5,7 +5,6 @@ function normalize(text) {
 	text = text.replace(/^the /g, '');
 	text = text.replace(/^a /g, '');
 	text = text.replace(/[^0-9a-zа-яё]/g, '');
-	console.log(text);
 	return text;
 }
 
