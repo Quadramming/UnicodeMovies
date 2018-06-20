@@ -1,0 +1,13 @@
+@font-face {
+	font-family: Noto Sans;
+	src: url('../assets/NotoSans-Regular.ttf');
+}
+
+@font-face {
+	font-family: Noto Emoji;
+	src: url('../assets/NotoEmoji-Regular.ttf');
+}
+
+.fontLoader {
+	color: #FFFFFF
+}
