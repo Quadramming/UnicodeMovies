@@ -1,5 +1,3 @@
-import c from './console.js';
-
 export default class extends Phaser.Scene {
 	
 	constructor() {

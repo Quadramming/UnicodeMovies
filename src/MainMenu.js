@@ -1,4 +1,3 @@
-import c from './console.js';
 import createButton from './createButton.js';
 
 export default class extends Phaser.Scene {

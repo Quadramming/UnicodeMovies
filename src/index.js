@@ -1,7 +1,7 @@
 import 'phaser';
-import hash from './hash.js';
+import './console.js';
 
-import c from './console.js';
+import hash from './hash.js';
 
 import SplashScreen from './SplashScreen.js';
 import MainMenu from './MainMenu.js';
@@ -13,8 +13,10 @@ import initStyles from './textStyles.js';
 
 const config = {
 	type: Phaser.CANVAS,
-	width: window.innerWidth,
-	height: window.innerHeight,
+	//width: window.innerWidth,
+	//height: window.innerHeight,
+	width: 600,
+	height: 800,
 	backgroundColor: '#FFFFFF',
 	scene: [{create}, SplashScreen, MainMenu, Gameplay, Help]
 };
@@ -33,9 +35,11 @@ function create() {
 
 const game = new Phaser.Game(config);
 
+/*
 window.addEventListener('resize', (event) => {
 	game.resize(window.innerWidth, window.innerHeight);
 }, false);
+*/
 
 window.addEventListener('load', () => {
 	if ( Phaser.style ) {

@@ -1,4 +1,4 @@
-export default (msg, ...rest) => {
+global.c = (msg, ...rest) => {
 	let out = msg;
 	if ( rest.length > 0 ) {
 		out = String(msg);
@@ -8,4 +8,3 @@ export default (msg, ...rest) => {
 	}
 	console.log(out);
 }
-
