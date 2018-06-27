@@ -9,19 +9,20 @@ export default class extends Phaser.Scene {
 	create() {
 		this._setupScroll();
 		
-		const style = Phaser.style;
+		const config = this.sys.game.config;
 		
-		this.add.text(0, 0, 'HELP', style.use('Title'));
+		this.add.text(config.width/2, 75, 'HELP', style.use('Title')).setOrigin(0.5);
 		
-		this._createBackButton(0, 100);
-		this._createBackButton(0, 500);
-		this._createHelpText(0, 200);
+		
+		this._createBackButton(config.width/2, 200);
+		this._createHelpText(0, 300);
+		this._createBackButton(config.width/2, 500);
 	}
 	
 	_createBackButton(x, y) {
 		createButton(this, () => {
 			this.scene.start('MainMenu');
-		}, x, y, 'Back', Phaser.style.use('Button'));
+		}, x, y, 'Back', style.use('Button'));
 	}
 	
 	_setupScroll() {
@@ -71,6 +72,6 @@ export default class extends Phaser.Scene {
 			'Q: I cant',
 			'A: You can'
 		];
-		this.add.text(x, y, helpText, Phaser.style.use('Text'));
+		this.add.text(x, y, helpText, style.use('Text'));
 	}
 }

@@ -7,21 +7,21 @@ export default class extends Phaser.Scene {
 	}
 	
 	create() {
-		const style = Phaser.style;
+		const config = this.sys.game.config;
 		
-		this.add.text(0, 0, 'UNICODE MOVIES', style.use('Title'));
+		this.add.text(config.width/2, 75, 'UNICODE MOVIES', style.use('Title')).setOrigin(0.5);
 		
 		createButton(this, () => {
 			this.scene.start('Gameplay');
-		}, 0, 100, 'Start', style.use('Button'));
-
+		}, config.width/2, 200, 'Start', style.use('Button'));
+		
 		createButton(this, () => {
 			this.scene.start('Help');
-		}, 0, 150, 'Help', style.use('Button'));
+		}, config.width/2, 300, 'Help', style.use('Button'));
 		
 		createButton(this, () => {
 			c('EXIT');
-		}, 0, 200, 'Exit', style.use('Button'));
+		}, config.width/2, 400, 'Exit', style.use('Button'));
 	}
 	
 }

@@ -1,4 +1,4 @@
-export default class {
+global.style = new class {
 	
 	constructor() {
 		this._map = new Map();
@@ -33,4 +33,4 @@ export default class {
 		return Object.assign({}, ...objs);
 	}
 	
-}
+};

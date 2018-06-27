@@ -1,6 +1,9 @@
 import 'phaser';
 import './console.js';
 
+import './style.js';
+import './textStyles.js';
+
 import hash from './hash.js';
 
 import SplashScreen from './SplashScreen.js';
@@ -8,8 +11,7 @@ import MainMenu from './MainMenu.js';
 import Gameplay from './Gameplay.js';
 import Help from './Help.js';
 import Storage from './Storage.js';
-import Style from './Style.js';
-import initStyles from './textStyles.js';
+import deleteFontLoaders from './deleteFontLoaders.js';
 
 const config = {
 	type: Phaser.CANVAS,
@@ -17,7 +19,7 @@ const config = {
 	//height: window.innerHeight,
 	width: 600,
 	height: 800,
-	backgroundColor: '#FFFFFF',
+	backgroundColor: '#aaaaaa',
 	scene: [{create}, SplashScreen, MainMenu, Gameplay, Help]
 };
 
@@ -42,9 +44,5 @@ window.addEventListener('resize', (event) => {
 */
 
 window.addEventListener('load', () => {
-	if ( Phaser.style ) {
-		alert('Error: Phaser.style exists!');
-	}
-	Phaser.style = new Style();
-	initStyles();
+	deleteFontLoaders();
 });
