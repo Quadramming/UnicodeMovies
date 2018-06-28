@@ -1,5 +1,4 @@
 import Movie from './Movie.js';
-import movies from './movies.js';
 import Keyboard from './Keyboard.js';
 import createButton from './createButton.js';
 
@@ -11,6 +10,7 @@ class TextInput {
 		this._obj = null;
 		this._x = x;
 		this._y = y;
+		this._textLimit = 5;
 	}
 	
 	create() {
@@ -20,6 +20,9 @@ class TextInput {
 	}
 	
 	add(v) {
+		if ( this._text.length >= this._textLimit ) {
+			return;
+		}
 		this._text += v;
 		this._obj.setText(this._text);
 	}
@@ -41,6 +44,15 @@ export default class extends Phaser.Scene {
 		super('Gameplay');
 		this._keyboard = null;
 		this._textInput = null;
+		this._level = null;
+		this._movieIndex = null;
+		this._movie = null;
+	}
+	
+	init(data) {
+		this._level = data.level;
+		this._movieIndex = parseInt(data.movie);
+		this._movie = new Movie(movies[data.level][data.movie]);
 	}
 	
 	preload() {
@@ -53,21 +65,18 @@ export default class extends Phaser.Scene {
 	create() {
 		const config = this.sys.game.config;
 		
-		const move = movies[0][0];
-		const m = new Movie(movies[0][0]);
-		
-		this.add.text(config.width/2, 175, m.getChars(), { fontFamily: 'Noto Emoji', fontSize: 64, color: '#000000' }).setOrigin(0.5);
+		this.add.text(config.width/2, 175, this._movie.getChars(), { fontFamily: 'Noto Emoji', fontSize: 64, color: '#000000' }).setOrigin(0.5);
 		
 		createButton(this, () => {
-			this.scene.start('MainMenu');
+			this.scene.start('Level', {level: this._level});
 		}, config.width/2, 50, 'Back', style.use('Button'));
 		
 		createButton(this, () => {
-			c('Next');
+			this._goNext();
 		}, config.width, 50, 'Next', style.use('Button')).setOrigin(1, 0.5);
 		
 		createButton(this, () => {
-			c('Previous');
+			this._goPrev();
 		}, 0, 50, 'Prev', style.use('Button')).setOrigin(0, 0.5);
 		
 		this._textInput.create();
@@ -80,6 +89,14 @@ export default class extends Phaser.Scene {
 				this._textInput.add(v);
 			}
 		});
+	}
+	
+	_goNext() {
+		this.scene.start('Gameplay', {level: this._level, movie: this._movieIndex + 1});
+	}
+	
+	_goPrev() {
+		this.scene.start('Gameplay', {level: this._level, movie: this._movieIndex - 1});
 	}
 	
 }

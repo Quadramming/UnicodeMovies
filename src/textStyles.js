@@ -1,4 +1,5 @@
 style.set('Noto', {fontFamily: 'Noto Sans'});
+style.set('Emoji', {fontFamily: 'Noto Emoji'});
 style.set('Black', {color: '#000000'});
 
 style.set('Text', {style: ['Noto', 'Black', {fontSize: 40}]});

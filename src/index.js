@@ -3,6 +3,7 @@ import './console.js';
 
 import './style.js';
 import './textStyles.js';
+import './movies.js';
 
 import hash from './hash.js';
 
@@ -10,6 +11,8 @@ import SplashScreen from './SplashScreen.js';
 import MainMenu from './MainMenu.js';
 import Gameplay from './Gameplay.js';
 import Help from './Help.js';
+import Levels from './Levels.js';
+import Level from './Level.js';
 import Storage from './Storage.js';
 import deleteFontLoaders from './deleteFontLoaders.js';
 
@@ -20,7 +23,7 @@ const config = {
 	width: 600,
 	height: 800,
 	backgroundColor: '#aaaaaa',
-	scene: [{create}, SplashScreen, MainMenu, Gameplay, Help]
+	scene: [{create}, SplashScreen, MainMenu, Gameplay, Help, Levels, Level]
 };
 
 function create() {

@@ -12,7 +12,7 @@ export default class extends Phaser.Scene {
 		this.add.text(config.width/2, 75, 'UNICODE MOVIES', style.use('Title')).setOrigin(0.5);
 		
 		createButton(this, () => {
-			this.scene.start('Gameplay');
+			this.scene.start('Levels');
 		}, config.width/2, 200, 'Start', style.use('Button'));
 		
 		createButton(this, () => {

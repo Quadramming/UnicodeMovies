@@ -4,17 +4,17 @@ import sceneScroll from './sceneScroll.js';
 export default class extends Phaser.Scene {
 	
 	constructor() {
-		super('Help');
+		super('Levels');
 	}
 	
 	create() {
 		const config = this.sys.game.config;
 		
-		this.add.text(config.width/2, 75, 'HELP', style.use('Title')).setOrigin(0.5);
+		this.add.text(config.width/2, 75, 'LEVELS', style.use('Title')).setOrigin(0.5);
 		
 		this._createBackButton(config.width/2, 200);
-		this._createHelpText(0, 300);
-		this._createBackButton(config.width/2, 500);
+		this._createLevels(config.width/2, 300);
+		
 		sceneScroll(this, {
 			left: 0,
 			right: 0,
@@ -29,11 +29,12 @@ export default class extends Phaser.Scene {
 		}, x, y, 'Back', style.use('Button'));
 	}
 	
-	_createHelpText(x, y) {
-		const helpText = [
-			'Q: I cant',
-			'A: You can'
-		];
-		this.add.text(x, y, helpText, style.use('Text'));
+	_createLevels(x, y) {
+		const gap = 50;
+		for ( const i in movies ) {
+			createButton(this, () => {
+				this.scene.start('Level', {level: parseInt(i)});
+			}, x, y + gap*i, `Level ${i}`, style.use('Button'));
+		}
 	}
 }
