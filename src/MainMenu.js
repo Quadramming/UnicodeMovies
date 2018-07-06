@@ -24,6 +24,21 @@ export default class extends Phaser.Scene {
 		createButton(this, () => {
 			c('EXIT');
 		}, config.width/2, 400, 'Exit', style.use('Button'));
+		
+		
+		const lastEntrance = storage.getLastEntrance();
+		const now = Date.now();
+		const timeDiff = (now - lastEntrance) / 1000;
+		const hintInterval = 10; 3600*4;
+		if ( timeDiff > hintInterval ) {
+			const hintButton = createButton(this, () => {
+				let hints = Math.floor( timeDiff/hintInterval );
+				hints = Math.min(hints, 10);
+				storage.setLastEntrance();
+				storage.addHints(hints);
+				hintButton.destroy();
+			}, config.width/2, 600, 'Get hints', style.use('Button'));
+		}
 	}
 	
 }

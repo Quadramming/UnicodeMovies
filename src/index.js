@@ -22,7 +22,7 @@ const config = {
 	//height: window.innerHeight,
 	width: 600,
 	height: 800,
-	backgroundColor: '#aaaaaa',
+	backgroundColor: '#f0f0ee',
 	scene: [{create}, SplashScreen, MainMenu, Gameplay, Help, Levels, Level]
 };
 
