@@ -1,4 +1,4 @@
-global.style = new class {
+export default new class {
 	
 	constructor() {
 		this._map = new Map();

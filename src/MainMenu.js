@@ -1,4 +1,6 @@
 import createButton from './createButton.js';
+import storage from './storageHandler.js';
+import style from './style.js';
 
 export default class extends Phaser.Scene {
 	

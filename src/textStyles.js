@@ -1,3 +1,5 @@
+import style from './style.js';
+
 style.set('Noto', {fontFamily: 'Noto Sans'});
 style.set('Emoji', {fontFamily: 'Noto Emoji'});
 style.set('Black', {color: '#000000'});

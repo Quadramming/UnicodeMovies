@@ -1,10 +1,10 @@
 ﻿import hash from './hash.js';
 
-global.movies =  [
+export default [
 	// Level 1
 	[
 		['\u{231B}\u{1F415}', 2009, ['A'].map(title => hash(title))],
-		['RUN', 1994, ['B', 'C']],
+		['RUN', 1994, ['B', 'C'].map(title => hash(title))],
 	],
 	// Level 2
 	[

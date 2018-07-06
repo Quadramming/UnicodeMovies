@@ -1,6 +1,9 @@
 import Movie from './Movie.js';
 import Keyboard from './Keyboard.js';
 import createButton from './createButton.js';
+import hash from './hash.js';
+import movies from './movies.js';
+import style from './style.js';
 
 class TextInput {
 	
@@ -11,6 +14,7 @@ class TextInput {
 		this._x = x;
 		this._y = y;
 		this._textLimit = 5;
+		this._onChange = null;
 	}
 	
 	create() {
@@ -19,12 +23,16 @@ class TextInput {
 		this._obj.setOrigin(0.5);
 	}
 	
+	setOnchange(fn) {
+		this._onChange = fn;
+	}
+	
 	add(v) {
 		if ( this._text.length >= this._textLimit ) {
 			return;
 		}
 		this._text += v;
-		this._obj.setText(this._text);
+		this._updateText();
 	}
 	
 	backspace() {
@@ -33,7 +41,40 @@ class TextInput {
 		} else {
 			// Noting to erase
 		}
+		this._updateText();
+	}
+	
+	_updateText() {
 		this._obj.setText(this._text);
+		if ( this._onChange ) {
+			this._onChange(this._text);
+		}
+	}
+	
+}
+
+class Hinter {
+	
+	constructor(scene, movie) {
+		this._scene = scene;
+		this._hintText = null;
+		this._movie = movie;
+		this._hintsLeft = 2;
+	}
+	
+	create() {
+		const config = this._scene.sys.game.config;
+		createButton(this._scene, () => {
+			if ( this._hintsLeft == 2 ) {
+				--this._hintsLeft;
+				let year = this._movie.getYear().substring(0, 3) + 'X';
+				this._hintText.setText( year );
+			} else if ( this._hintsLeft == 1 ) {
+				--this._hintsLeft;
+				this._hintText.setText( this._movie.getYear() );
+			}
+		}, 0, 350, 'Hint', style.use('Button')).setOrigin(0, 0.5);;
+		this._hintText = this._scene.add.text(config.width/2, 350, '', { fontFamily: 'Noto Emoji', fontSize: 64, color: '#000000' }).setOrigin(0.5);
 	}
 	
 }
@@ -47,6 +88,7 @@ export default class extends Phaser.Scene {
 		this._level = null;
 		this._movieIndex = null;
 		this._movie = null;
+		this._hinter = null;
 	}
 	
 	init(data) {
@@ -60,6 +102,7 @@ export default class extends Phaser.Scene {
 		this._textInput = new TextInput(this, config.width/2, 300);
 		this._keyboard = new Keyboard(this);
 		this._keyboard.preload();
+		this._hinter = new Hinter(this, this._movie);
 	}
 	
 	create() {
@@ -71,13 +114,17 @@ export default class extends Phaser.Scene {
 			this.scene.start('Level', {level: this._level});
 		}, config.width/2, 50, 'Back', style.use('Button'));
 		
-		createButton(this, () => {
-			this._goNext();
-		}, config.width, 50, 'Next', style.use('Button')).setOrigin(1, 0.5);
+		if ( this._isNextExists() ) {
+			createButton(this, () => {
+				this._goNext();
+			}, config.width, 50, 'Next', style.use('Button')).setOrigin(1, 0.5);
+		}
 		
-		createButton(this, () => {
-			this._goPrev();
-		}, 0, 50, 'Prev', style.use('Button')).setOrigin(0, 0.5);
+		if ( this._isPrevExists() ) {
+			createButton(this, () => {
+				this._goPrev();
+			}, 0, 50, 'Prev', style.use('Button')).setOrigin(0, 0.5);
+		}
 		
 		this._textInput.create();
 		this._keyboard.create();
@@ -89,6 +136,34 @@ export default class extends Phaser.Scene {
 				this._textInput.add(v);
 			}
 		});
+		
+		this._textInput.setOnchange((text) => {
+			if ( this._movie.titles.includes(hash(text)) ) {
+				this._win();
+			}
+		});
+		
+		this._hinter.create();
+	}
+	
+	_win() {
+		c("winner");
+		if ( this._isNextExists() ) {
+			this._goNext();
+		} else {
+			this.scene.start('Level', {level: this._level});
+		}
+	}
+	
+	_isNextExists() {
+		const nextIndex = this._movieIndex + 1;
+		const maxIndex = movies[this._level].length;
+		return nextIndex < maxIndex;
+	}
+	
+	_isPrevExists() {
+		const prevIndex = this._movieIndex - 1;
+		return prevIndex >= 0;
 	}
 	
 	_goNext() {

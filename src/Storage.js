@@ -9,7 +9,11 @@ export default class {
 	}
 	
 	set(key, value) {
-		if ( value === undefined || value === null ) {
+		if ( value === undefined ) {
+			return;
+		}
+		if ( value === null ) {
+			this.remove(key);
 			return;
 		}
 		this._storage.setItem(key, value);
@@ -17,6 +21,15 @@ export default class {
 	
 	get(key) {
 		return this._storage.getItem(key);
+	}
+	
+	getNumber(key, def = 0) {
+		let result = this.get(key);
+		if ( result === null ) {
+			result = def;
+			this.set(key, result)
+		}
+		return Number(result);
 	}
 	
 };

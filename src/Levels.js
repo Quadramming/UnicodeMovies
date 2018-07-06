@@ -1,5 +1,8 @@
 import createButton from './createButton.js';
 import sceneScroll from './sceneScroll.js';
+import storage from './storageHandler.js';
+import movies from './movies.js';
+import style from './style.js';
 
 export default class extends Phaser.Scene {
 	
