@@ -73,10 +73,13 @@ class Hinter {
 		}
 	}
 	
+	win() {
+		storage.setMovieHints(this._movie, this._maxHints);
+		this._destroyButton();
+		this._setHintText();
+	}
+	
 	_isCanHint() {
-		if ( storage.getHints() === 0 ) {
-			return false;
-		}
 		if ( storage.getMovieHints(this._movie) === this._maxHints ) {
 			return false;
 		}
@@ -89,6 +92,9 @@ class Hinter {
 	}
 	
 	_getHint(x, y) {
+		if ( storage.getHints() === 0 ) {
+			return false;
+		}
 		this._minusHint(x, y);
 		storage.addMovieHints(this._movie);
 		this._setHintText();
@@ -142,12 +148,15 @@ export default class extends Phaser.Scene {
 		this._movieIndex = null;
 		this._movie = null;
 		this._hinter = null;
+		this._answer = null;
 	}
 	
 	init(data) {
 		this._level = data.level;
 		this._movieIndex = parseInt(data.movie);
 		this._movie = new Movie(movies[data.level][data.movie]);
+		this._answer = storage.getAnswer(this._movie);
+		c(this._answer);
 	}
 	
 	preload() {
@@ -160,6 +169,10 @@ export default class extends Phaser.Scene {
 	
 	create() {
 		const config = this.sys.game.config;
+		
+		if ( this._answer ) {
+			this.add.text(config.width/2, 100, this._answer, style.use('Text')).setOrigin(0.5);
+		}
 		
 		this.add.text(config.width/2, 175, this._movie.getChars(), { fontFamily: 'Noto Emoji', fontSize: 64, color: '#000000' }).setOrigin(0.5);
 		
@@ -191,16 +204,20 @@ export default class extends Phaser.Scene {
 		});
 		
 		this._textInput.setOnchange((text) => {
-			if ( this._movie.titles.includes(hash(text)) ) {
-				this._win();
+			if ( ! this._answer ) {
+				if ( this._movie.titles.includes(hash(text)) ) {
+					this._win(text);
+				}
 			}
 		});
 		
 		this._hinter.create();
 	}
 	
-	_win() {
-		c("winner");
+	_win(text) {
+		this._hinter.win();
+		storage.setAnswer(this._movie, text);
+		return;
 		if ( this._isNextExists() ) {
 			this._goNext();
 		} else {
