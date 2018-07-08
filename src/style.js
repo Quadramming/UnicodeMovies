@@ -33,4 +33,5 @@ export default new class {
 		return Object.assign({}, ...objs);
 	}
 	
-};
+}
+

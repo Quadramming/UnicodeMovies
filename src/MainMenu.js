@@ -29,14 +29,21 @@ export default class extends Phaser.Scene {
 		const lastEntrance = storage.getLastEntrance();
 		const now = Date.now();
 		const timeDiff = (now - lastEntrance) / 1000;
-		const hintInterval = 10; 3600*4;
+		const hintInterval = 1; 3600*4;
 		if ( timeDiff > hintInterval ) {
-			const hintButton = createButton(this, () => {
+			const hintButton = createButton(this, (x, y) => {
 				let hints = Math.floor( timeDiff/hintInterval );
 				hints = Math.min(hints, 10);
 				storage.setLastEntrance();
 				storage.addHints(hints);
 				hintButton.destroy();
+				const textHints = this.add.text(x, y, `+${hints}`, style.use('HintBubble')).setOrigin(0.5);
+				this.tweens.add({
+					targets: textHints,
+					y: hintButton.y - 150,
+					alpha: 0,
+					duration: 1000
+				});
 			}, config.width/2, 600, 'Get hints', style.use('Button'));
 		}
 	}

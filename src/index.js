@@ -1,9 +1,10 @@
 import 'phaser';
 import './console.js';
 
-import './textStyles.js';
 import './movies.js';
+import './textStyles.js';
 
+import style from './style.js';
 import hash from './hash.js';
 
 import SplashScreen from './SplashScreen.js';
@@ -21,7 +22,7 @@ const config = {
 	//height: window.innerHeight,
 	width: 600,
 	height: 800,
-	backgroundColor: '#f0f0ee',
+	backgroundColor: style.use('appBackGround').color,
 	scene: [{create}, SplashScreen, MainMenu, Gameplay, Help, Levels, Level]
 };
 

@@ -4,6 +4,7 @@ import createButton from './createButton.js';
 import hash from './hash.js';
 import movies from './movies.js';
 import style from './style.js';
+import storage from './storageHandler.js';
 
 class TextInput {
 	
@@ -59,22 +60,74 @@ class Hinter {
 		this._scene = scene;
 		this._hintText = null;
 		this._movie = movie;
-		this._hintsLeft = 2;
+		this._maxHints = 3;
+		this._button = null;
 	}
 	
 	create() {
 		const config = this._scene.sys.game.config;
-		createButton(this._scene, () => {
-			if ( this._hintsLeft == 2 ) {
-				--this._hintsLeft;
-				let year = this._movie.getYear().substring(0, 3) + 'X';
-				this._hintText.setText( year );
-			} else if ( this._hintsLeft == 1 ) {
-				--this._hintsLeft;
-				this._hintText.setText( this._movie.getYear() );
-			}
-		}, 0, 350, 'Hint', style.use('Button')).setOrigin(0, 0.5);;
-		this._hintText = this._scene.add.text(config.width/2, 350, '', { fontFamily: 'Noto Emoji', fontSize: 64, color: '#000000' }).setOrigin(0.5);
+		this._hintText = this._scene.add.text(config.width/2, 350, '', style.use('Text')).setOrigin(0.5);
+		this._setHintText();
+		if ( this._isCanHint() ) {
+			this._button = createButton(this._scene, this._getHint.bind(this), 0, 350, this._getUseHintText(), style.use('Button')).setOrigin(0, 0.5);
+		}
+	}
+	
+	_isCanHint() {
+		if ( storage.getHints() === 0 ) {
+			return false;
+		}
+		if ( storage.getMovieHints(this._movie) === this._maxHints ) {
+			return false;
+		}
+		return true;
+	}
+	
+	_getUseHintText() {
+		const hints = storage.getHints();
+		return `Use hint (${hints})`;
+	}
+	
+	_getHint(x, y) {
+		this._minusHint(x, y);
+		storage.addMovieHints(this._movie);
+		this._setHintText();
+		if ( this._isCanHint() ) {
+			this._button.setText(this._getUseHintText());
+		} else {
+			this._destroyButton();
+		}
+	}
+	
+	_setHintText() {
+		const level = storage.getMovieHints(this._movie);
+		let text = '';
+		if ( level === 1 ) {
+			text = this._movie.getCentury();
+		} else if ( level === 2 ) {
+			text = this._movie.getDecade();
+		} else if ( level === 3 ) {
+			text = this._movie.getYear();
+		}
+		this._hintText.setText( text );
+	}
+	
+	_destroyButton() {
+		if ( this._button ) {
+			this._button.destroy();
+			this._button = null;
+		}
+	}
+	
+	_minusHint(x, y) {
+		storage.subHint();
+		const textHints = this._scene.add.text(x, y, '-1', style.use('HintBubble')).setOrigin(0.5);
+		this._scene.tweens.add({
+			targets: textHints,
+			y: textHints.y - 150,
+			alpha: 0,
+			duration: 1000
+		});
 	}
 	
 }

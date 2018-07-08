@@ -11,8 +11,8 @@ export default (scene, fn, ...rest) => {
 	
 	const toucher = new Toucher(scene);
 	toucher.assignObj(obj);
-	toucher.setOnUp(() => {
-		fn();
+	toucher.setOnUp((...args) => {
+		fn(...args);
 	});
 	
 	return obj;
