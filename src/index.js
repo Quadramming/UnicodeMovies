@@ -1,7 +1,6 @@
 import 'phaser';
 import './console.js';
 
-import './style.js';
 import './textStyles.js';
 import './movies.js';
 
