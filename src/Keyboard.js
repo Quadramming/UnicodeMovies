@@ -115,4 +115,5 @@ export default class {
 		this._keys.push(new Key( 'BACKSPACE', 30+60*8, 240, 90, 80 ));
 		this._keys.push(new Key( ' ', 180, 320, 240, 80 ));
 	}
+	
 }

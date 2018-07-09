@@ -40,4 +40,5 @@ export default class extends Phaser.Scene {
 			}, x, y + gap*i, `Level ${i}`, style.use('Button'));
 		}
 	}
+	
 }

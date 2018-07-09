@@ -1,7 +1,6 @@
 import Toucher from './Toucher.js';
 
 export default (scene, fn, ...rest) => {
-	
 	const obj = scene.add.text(...rest);
 	obj.setOrigin(0.5);
 	obj.setInteractive(

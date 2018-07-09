@@ -37,4 +37,5 @@ export default class extends Phaser.Scene {
 		];
 		this.add.text(x, y, helpText, style.use('Text'));
 	}
+	
 }
