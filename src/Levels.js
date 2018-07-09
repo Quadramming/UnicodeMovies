@@ -3,6 +3,7 @@ import sceneScroll from './sceneScroll.js';
 import storage from './storageHandler.js';
 import movies from './movies.js';
 import style from './style.js';
+import scene from './scene.js';
 
 export default class extends Phaser.Scene {
 	
@@ -24,11 +25,12 @@ export default class extends Phaser.Scene {
 			top: 0,
 			bottom: -100
 		});
+		scene.appear(this);
 	}
 	
 	_createBackButton(x, y) {
 		createButton(this, () => {
-			this.scene.start('MainMenu');
+			scene.start('MainMenu', this);
 		}, x, y, 'Back', style.use('Button'));
 	}
 	
@@ -36,7 +38,7 @@ export default class extends Phaser.Scene {
 		const gap = 50;
 		for ( const i in movies ) {
 			createButton(this, () => {
-				this.scene.start('Level', {level: parseInt(i)});
+				scene.start('Level', this, {level: parseInt(i)});
 			}, x, y + gap*i, `Level ${i}`, style.use('Button'));
 		}
 	}

@@ -10,4 +10,4 @@ style.set('Text', {style: ['Noto', 'TextColor', {fontSize: 40}]});
 style.set('Title', {style: ['Noto', 'TextColor', {fontSize: 64}]});
 style.set('Button', {style: ['Noto', 'ButtonColor', {fontSize: 55}]});
 
-style.set('appBackGround', {color: '#f7f7f7'});
+style.set('appBackGround', {color: '#F7F7F7', colorInt: 0xF7F7F7, r: 0xF7 , g: 0xF7, b: 0xF7});

@@ -5,6 +5,8 @@ import hash from './hash.js';
 import movies from './movies.js';
 import style from './style.js';
 import storage from './storageHandler.js';
+import scene from './scene.js';
+import disappear from './disappear.js';
 
 class TextInput {
 	
@@ -120,7 +122,7 @@ class Hinter {
 	
 	_destroyButton() {
 		if ( this._button ) {
-			this._button.destroy();
+			disappear(this._button);
 			this._button = null;
 		}
 	}
@@ -130,7 +132,7 @@ class Hinter {
 		const textHints = this._scene.add.text(x, y, '-1', style.use('HintBubble')).setOrigin(0.5);
 		this._scene.tweens.add({
 			targets: textHints,
-			y: textHints.y - 150,
+			y: textHints.y - 100,
 			alpha: 0,
 			duration: 1000
 		});
@@ -149,6 +151,7 @@ export default class extends Phaser.Scene {
 		this._movie = null;
 		this._hinter = null;
 		this._answer = null;
+		this._check = null;
 	}
 	
 	init(data) {
@@ -156,20 +159,19 @@ export default class extends Phaser.Scene {
 		this._movieIndex = parseInt(data.movie);
 		this._movie = new Movie(movies[data.level][data.movie]);
 		this._answer = storage.getAnswer(this._movie);
-		c(this._answer);
 	}
 	
 	preload() {
-		const config = this.sys.game.config;
-		this._textInput = new TextInput(this, config.width/2, 300);
 		this._keyboard = new Keyboard(this);
 		this._keyboard.preload();
-		this._hinter = new Hinter(this, this._movie);
+		this.load.image('Check', 'assets/check.png');
 	}
 	
 	create() {
 		const config = this.sys.game.config;
-		
+		this._textInput = new TextInput(this, config.width/2, 300);
+		this._hinter = new Hinter(this, this._movie);
+
 		if ( this._answer ) {
 			this.add.text(config.width/2, 100, this._answer, style.use('Text')).setOrigin(0.5);
 		}
@@ -177,7 +179,7 @@ export default class extends Phaser.Scene {
 		this.add.text(config.width/2, 175, this._movie.getChars(), { fontFamily: 'Noto Emoji', fontSize: 64, color: '#000000' }).setOrigin(0.5);
 		
 		createButton(this, () => {
-			this.scene.start('Level', {level: this._level});
+			scene.start('Level', this, {level: this._level});
 		}, config.width/2, 50, 'Back', style.use('Button'));
 		
 		if ( this._isNextExists() ) {
@@ -204,7 +206,7 @@ export default class extends Phaser.Scene {
 		});
 		
 		this._textInput.setOnchange((text) => {
-			if ( ! this._answer ) {
+			if ( true || ! this._answer ) {
 				if ( this._movie.titles.includes(hash(text)) ) {
 					this._win(text);
 				}
@@ -212,17 +214,28 @@ export default class extends Phaser.Scene {
 		});
 		
 		this._hinter.create();
+		this._check = this.add.sprite(config.width/2, config.height/4, 'Check').setOrigin(0.5);
+		this._check.setAlpha(0);
+		this._check.setScale(2);
+		scene.appear(this);
 	}
 	
 	_win(text) {
+		const config = this.sys.game.config;
 		this._hinter.win();
 		storage.setAnswer(this._movie, text);
-		return;
-		if ( this._isNextExists() ) {
-			this._goNext();
-		} else {
-			this.scene.start('Level', {level: this._level});
-		}
+		this.tweens.add({
+			targets: this._check,
+			alpha: 1,
+			duration: 1000,
+			onComplete: () => {
+				if ( this._isNextExists() ) {
+					this._goNext();
+				} else {
+					scene.start('Level', this, {level: this._level});
+				}
+			}
+		});
 	}
 	
 	_isNextExists() {
@@ -237,11 +250,11 @@ export default class extends Phaser.Scene {
 	}
 	
 	_goNext() {
-		this.scene.start('Gameplay', {level: this._level, movie: this._movieIndex + 1});
+		scene.start('Gameplay', this, {level: this._level, movie: this._movieIndex + 1});
 	}
 	
 	_goPrev() {
-		this.scene.start('Gameplay', {level: this._level, movie: this._movieIndex - 1});
+		scene.start('Gameplay', this, {level: this._level, movie: this._movieIndex - 1});
 	}
 	
 }

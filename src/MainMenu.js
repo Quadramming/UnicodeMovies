@@ -1,6 +1,8 @@
 import createButton from './createButton.js';
 import storage from './storageHandler.js';
 import style from './style.js';
+import scene from './scene.js';
+import disappear from './disappear.js';
 
 export default class extends Phaser.Scene {
 	
@@ -14,11 +16,11 @@ export default class extends Phaser.Scene {
 		this.add.text(config.width/2, 75, 'UNICODE MOVIES', style.use('Title')).setOrigin(0.5);
 		
 		createButton(this, () => {
-			this.scene.start('Levels');
+			scene.start('Levels', this);
 		}, config.width/2, 200, 'Start', style.use('Button'));
 		
 		createButton(this, () => {
-			this.scene.start('Help');
+			scene.start('Help', this);
 		}, config.width/2, 300, 'Help', style.use('Button'));
 		
 		createButton(this, () => {
@@ -36,16 +38,17 @@ export default class extends Phaser.Scene {
 				hints = Math.min(hints, 10);
 				storage.setLastEntrance();
 				storage.addHints(hints);
-				hintButton.destroy();
+				disappear(hintButton);
 				const textHints = this.add.text(x, y, `+${hints}`, style.use('HintBubble')).setOrigin(0.5);
 				this.tweens.add({
 					targets: textHints,
-					y: hintButton.y - 150,
+					y: hintButton.y - 100,
 					alpha: 0,
 					duration: 1000
 				});
 			}, config.width/2, 600, 'Get hints', style.use('Button'));
 		}
+		scene.appear(this);
 	}
 	
 }

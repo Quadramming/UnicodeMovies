@@ -1,6 +1,7 @@
 import createButton from './createButton.js';
 import sceneScroll from './sceneScroll.js';
 import style from './style.js';
+import scene from './scene.js';
 
 export default class extends Phaser.Scene {
 	
@@ -22,11 +23,12 @@ export default class extends Phaser.Scene {
 			top: 0,
 			bottom: -100
 		});
+		scene.appear(this);
 	}
 	
 	_createBackButton(x, y) {
 		createButton(this, () => {
-			this.scene.start('MainMenu');
+			scene.start('MainMenu', this);
 		}, x, y, 'Back', style.use('Button'));
 	}
 	
