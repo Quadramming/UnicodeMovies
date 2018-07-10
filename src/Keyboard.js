@@ -37,6 +37,15 @@ export default class {
 		this._startPress = null;
 		this._shift = null;
 		this._holdTimer = 700;
+		this._enabled = true;
+	}
+	
+	enable() {
+		this._enabled = true;
+	}
+	
+	disable() {
+		this._enabled = false;
 	}
 	
 	preload() {
@@ -52,6 +61,9 @@ export default class {
 		const toucher = new Toucher(this._scene);
 		toucher.assignObj(sprite);
 		toucher.setOnDown( (x, y, objs, localX, localY) => {
+			if ( ! this._enabled ) {
+				return false;
+			}
 			for ( const key of this._keys ) {
 				if ( key.isHit(localX, localY) ) {
 					this._onKey(key.getValue());
@@ -60,6 +72,9 @@ export default class {
 			}
 		});
 		toucher.setOnHold(() => {
+			if ( ! this._enabled ) {
+				return false;
+			}
 			if ( this._shift ) {
 				this._onKey('BACKSPACE');
 				this._onKey(this._shift);

@@ -82,7 +82,7 @@ class Hinter {
 	}
 	
 	_isCanHint() {
-		if ( storage.getMovieHints(this._movie) === this._maxHints ) {
+		if ( storage.getMovieHints(this._movie) >= this._maxHints ) {
 			return false;
 		}
 		return true;
@@ -95,6 +95,9 @@ class Hinter {
 	
 	_getHint(x, y) {
 		if ( storage.getHints() === 0 ) {
+			return false;
+		}
+		if ( this._scene.tweens.getAllTweens().length > 0 ) {
 			return false;
 		}
 		this._minusHint(x, y);
@@ -142,9 +145,12 @@ class Hinter {
 		const textHints = this._scene.add.text(x, y, '-1', style.use('HintBubble')).setOrigin(0.5);
 		this._scene.tweens.add({
 			targets: textHints,
-			y: textHints.y - 100,
+			y: textHints.y - 50,
 			alpha: 0,
-			duration: 1000
+			duration: 1000,
+			onComplete: () => {
+				textHints.destroy();
+			}
 		});
 	}
 	
@@ -219,7 +225,7 @@ export default class extends Phaser.Scene {
 		});
 		
 		this._textInput.setOnchange((text) => {
-			if ( true || ! this._answer ) {
+			if ( ! this._answer ) {
 				if ( this._movie.titles.includes(hash(text)) ) {
 					this._win(text);
 				}
@@ -232,12 +238,14 @@ export default class extends Phaser.Scene {
 	
 	_win(text) {
 		const config = this.sys.game.config;
+		this._keyboard.disable();
 		this._hinter.win();
 		storage.setAnswer(this._movie, text);
 		this.tweens.add({
 			targets: this._winEmoji,
 			alpha: 1,
-			duration: 1000,
+			duration: 1500,
+			ease: 'Expo.easeOut',
 			onComplete: () => {
 				if ( this._isNextExists() ) {
 					this._goNext();
