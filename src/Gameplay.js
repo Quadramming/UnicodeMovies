@@ -69,7 +69,7 @@ class Hinter {
 	create() {
 		const config = this._scene.sys.game.config;
 		this._hintText = this._scene.add.text(config.width/2, 350, '', style.use('Text')).setOrigin(0.5);
-		this._setHintText();
+		this._setHintText(false);
 		if ( this._isCanHint() ) {
 			this._button = createButton(this._scene, this._getHint.bind(this), 0, 350, this._getUseHintText(), style.use('Button')).setOrigin(0, 0.5);
 		}
@@ -107,7 +107,7 @@ class Hinter {
 		}
 	}
 	
-	_setHintText() {
+	_setHintText(tweens = true) {
 		const level = storage.getMovieHints(this._movie);
 		let text = '';
 		if ( level === 1 ) {
@@ -117,7 +117,17 @@ class Hinter {
 		} else if ( level === 3 ) {
 			text = this._movie.getYear();
 		}
-		this._hintText.setText( text );
+		if ( tweens ) {
+			this._scene.tweens.add({
+				targets: this._hintText,
+				duration: 200,
+				yoyo: true,
+				alpha: 0,
+				onYoyo: () => { this._hintText.setText( text ) },
+			});
+		} else {
+			this._hintText.setText( text );
+		}
 	}
 	
 	_destroyButton() {
@@ -151,7 +161,7 @@ export default class extends Phaser.Scene {
 		this._movie = null;
 		this._hinter = null;
 		this._answer = null;
-		this._check = null;
+		this._winEmoji = null;
 	}
 	
 	init(data) {
@@ -164,7 +174,6 @@ export default class extends Phaser.Scene {
 	preload() {
 		this._keyboard = new Keyboard(this);
 		this._keyboard.preload();
-		this.load.image('Check', 'assets/check.png');
 	}
 	
 	create() {
@@ -176,7 +185,11 @@ export default class extends Phaser.Scene {
 			this.add.text(config.width/2, 100, this._answer, style.use('Text')).setOrigin(0.5);
 		}
 		
-		this.add.text(config.width/2, 175, this._movie.getChars(), { fontFamily: 'Noto Emoji', fontSize: 64, color: '#000000' }).setOrigin(0.5);
+		this.add.text(config.width/2, 175, this._movie.getChars(), style.use('MovieEmoji')).setOrigin(0.5);
+		this._winEmoji = this.add.text(config.width/2, 175, this._movie.getChars(), style.use('MovieEmojiDone')).setOrigin(0.5);
+		if ( ! this._answer ) {
+			this._winEmoji.setAlpha(0);
+		}
 		
 		createButton(this, () => {
 			scene.start('Level', this, {level: this._level});
@@ -214,9 +227,6 @@ export default class extends Phaser.Scene {
 		});
 		
 		this._hinter.create();
-		this._check = this.add.sprite(config.width/2, config.height/4, 'Check').setOrigin(0.5);
-		this._check.setAlpha(0);
-		this._check.setScale(2);
 		scene.appear(this);
 	}
 	
@@ -225,7 +235,7 @@ export default class extends Phaser.Scene {
 		this._hinter.win();
 		storage.setAnswer(this._movie, text);
 		this.tweens.add({
-			targets: this._check,
+			targets: this._winEmoji,
 			alpha: 1,
 			duration: 1000,
 			onComplete: () => {

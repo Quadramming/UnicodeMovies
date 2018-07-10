@@ -9,4 +9,3 @@ export default (obj) => {
 			onComplete: () => {obj.destroy();}
 		});
 }
-
