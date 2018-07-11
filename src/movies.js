@@ -8,12 +8,12 @@ export default [
 	],
 	// Level 2
 	[
-		['Film2.1', 2009, ['F'].map(title => hash(title))],
-		['Film2.2', 1994, ['FF', 'FFF']],
+		['Film2.1', 2009, ['A'].map(title => hash(title))],
+		['Film2.2', 1994, ['B', 'C'].map(title => hash(title))],
 	],
 	// Level 3
 	[
 		['Film3.1', 2009, ['A'].map(title => hash(title))],
-		['Film3.2', 1994, ['AA', 'AAA']],
+		['Film3.2', 1994, ['AA', 'AAA'].map(title => hash(title))],
 	]
 ]

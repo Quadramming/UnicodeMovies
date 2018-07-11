@@ -1,4 +1,5 @@
 import hash from './hash.js';
+import storage from './storageHandler.js';
 
 export default class {
 	
@@ -12,6 +13,11 @@ export default class {
 		}
 		this.year = year;
 		this.id = hash(id);
+	}
+	
+	isAnswered() {
+		const answer = storage.getAnswer(this);
+		return answer !== null;
 	}
 	
 	getId() {

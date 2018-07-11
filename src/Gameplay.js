@@ -76,9 +76,11 @@ class Hinter {
 	}
 	
 	win() {
-		storage.setMovieHints(this._movie, this._maxHints);
-		this._destroyButton();
-		this._setHintText();
+		if ( storage.getMovieHints(this._movie) < this._maxHints ) {
+			storage.setMovieHints(this._movie, this._maxHints);
+			this._destroyButton();
+			this._setHintText();
+		}
 	}
 	
 	_isCanHint() {

@@ -5,6 +5,8 @@ style.set('Emoji', {fontFamily: 'Noto Emoji'});
 style.set('TextColor', {color: '#4B4B4B'});
 style.set('ButtonColor', {color: '#4B4B4B'});
 style.set('Green', {color: '#819B4D'});
+style.set('Red', {color: '#FF0000'});
+style.set('Gray', {color: '#aaaaaa'});
 
 style.set('HintBubble', {style: ['Noto', {color: '#757575'}, {fontSize: 40}]});
 style.set('Text', {style: ['Noto', 'TextColor', {fontSize: 40}]});
