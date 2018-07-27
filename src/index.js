@@ -5,15 +5,12 @@ import './movies.js';
 import './textStyles.js';
 
 import style from './style.js';
-import hash from './hash.js';
-
 import SplashScreen from './SplashScreen.js';
 import MainMenu from './MainMenu.js';
 import Gameplay from './Gameplay.js';
 import Help from './Help.js';
 import Levels from './Levels.js';
 import Level from './Level.js';
-import Storage from './Storage.js';
 import deleteFontLoaders from './deleteFontLoaders.js';
 
 const config = {
@@ -30,11 +27,9 @@ function create() {
 	const canvas = this.sys.game.canvas;
 	const w = this.sys.game.config.width;
 	const h = this.sys.game.config.height;
-	
 	canvas.style.position = 'absolute';
 	canvas.style.left = (window.innerWidth/2 - w/2) + 'px';
 	canvas.style.top  = (window.innerHeight/2 - h/2) + 'px';
-	
 	this.scene.start('SplashScreen');
 }
 

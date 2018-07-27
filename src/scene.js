@@ -7,11 +7,11 @@ function start(newScene, scene, ...args) {
 	const color = style.use('appBackGround');
 	
 	scene.cameras.main.on('camerafadeoutstart', () => {
-		scene.input.disable(game);
+		scene.input.enabled = false;
 	});
 	scene.cameras.main.on('camerafadeoutcomplete', () => {
+		scene.input.enabled = true;
 		scene.scene.start(newScene, ...args);
-		scene.input.enable(game);
 	});
 	
 	scene.cameras.main.fadeOut(speed, color.r, color.g, color.b);

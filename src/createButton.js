@@ -7,12 +7,10 @@ export default (scene, fn, ...rest) => {
 		new Phaser.Geom.Rectangle(0, 0, obj.width, obj.height),
 		Phaser.Geom.Rectangle.Contains
 	);
-	
 	const toucher = new Toucher(scene);
 	toucher.assignObj(obj);
-	toucher.setOnUp((...args) => {
-		fn(...args);
-	});
-	
+	if ( fn ) {
+		toucher.setOnUp( fn.bind() );
+	}
 	return obj;
 }

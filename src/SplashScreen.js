@@ -20,7 +20,7 @@ export default class extends Phaser.Scene {
 			alpha: 1,
 			ease: 'Expo.easeOut',
 			//duration: 1000,
-			duration: 200,
+			duration: 100,
 			yoyo: true,
 			onComplete: () => {
 				this.scene.start('MainMenu');

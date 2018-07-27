@@ -1,10 +1,10 @@
 import createButton from './createButton.js';
 import sceneScroll from './sceneScroll.js';
-import storage from './storageHandler.js';
 import movies from './movies.js';
 import Movie from './Movie.js';
 import style from './style.js';
 import scene from './scene.js';
+import startSceneFn from './startSceneFn.js'
 
 export default class extends Phaser.Scene {
 	
@@ -13,26 +13,21 @@ export default class extends Phaser.Scene {
 	}
 	
 	create() {
-		const config = this.sys.game.config;
-		
-		this.add.text(config.width/2, 75, 'LEVELS', style.use('Title')).setOrigin(0.5);
-		
-		this._createBackButton(config.width/2, 200);
-		this._createLevels(config.width/2, 300);
-		
+		this._config = this.sys.game.config;
 		sceneScroll(this, {
 			left: 0,
 			right: 0,
 			top: 0,
 			bottom: -100
 		});
+		this.add.text(this._config.width/2, 75, 'LEVELS', style.use('Title')).setOrigin(0.5);
+		this._createBackButton(this._config.width/2, 200);
+		this._createLevels(this._config.width/2, 300);
 		scene.appear(this);
 	}
 	
 	_createBackButton(x, y) {
-		createButton(this, () => {
-			scene.start('MainMenu', this);
-		}, x, y, 'Back', style.use('Button'));
+		createButton(this, startSceneFn('MainMenu', this), x, y, 'Back', style.use('Button'));
 	}
 	
 	_createLevels(x, y) {
@@ -55,12 +50,10 @@ export default class extends Phaser.Scene {
 				buttonStyle = style.use(buttonStyle, 'Green');
 			}
 			if ( isOpened ) {
-				createButton(this, () => {
-					scene.start('Level', this, {level: parseInt(i)});
-				}, x, y + gap*i, `Level ${i}`, buttonStyle);
+				createButton(this, startSceneFn('Level', this, {level: parseInt(i)}), x, y + gap*i, `Level ${i}`, buttonStyle);
 			} else {
 				buttonStyle = style.use(buttonStyle, 'Gray');
-				createButton(this, () => {}, x, y + gap*i, `Level ${i}`, buttonStyle);
+				createButton(this, null, x, y + gap*i, `Level ${i}`, buttonStyle);
 			}
 			if ( ! isCompleted ) {
 				isChampion = false;
@@ -70,8 +63,7 @@ export default class extends Phaser.Scene {
 			}
 		}
 		if ( isChampion ) {
-			const config = this.sys.game.config;
-			this.add.text(config.width/2, 125, 'You are the champion', style.use('Title', 'Red')).setOrigin(0.5);
+			this.add.text(this._config.width/2, 125, 'You are the champion', style.use('Title', 'Red')).setOrigin(0.5);
 		}
 	}
 	

@@ -18,11 +18,9 @@ export default (scene, clip = null) => {
 		x: 0,
 		y: 0
 	};
-	
 	scene.input.on('pointerup', (pointer) => {
 		p.active = false;
 	});
-	
 	scene.input.on('pointermove', (pointer) => {
 		if ( ! pointer.isDown ) {
 			return;
