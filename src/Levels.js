@@ -2,9 +2,10 @@ import createButton from './createButton.js';
 import sceneScroll from './sceneScroll.js';
 import movies from './movies.js';
 import Movie from './Movie.js';
-import style from './style.js';
 import scene from './scene.js';
 import startSceneFn from './startSceneFn.js'
+import style from './styleTag.js';
+import T from './i18n.js'
 
 export default class extends Phaser.Scene {
 	
@@ -20,14 +21,17 @@ export default class extends Phaser.Scene {
 			top: 0,
 			bottom: -100
 		});
-		this.add.text(this._config.width/2, 75, 'LEVELS', style.use('Title')).setOrigin(0.5);
-		this._createBackButton(this._config.width/2, 200);
-		this._createLevels(this._config.width/2, 300);
+		this.add.text(this._config.width/2, 75, T`LEVELS`, style`Title`).setOrigin(0.5);
+		this._createBackButton(this._config.width/2, 225);
+		const isChampion = this._createLevels(this._config.width/2, 325);
+		if ( isChampion ) {
+			this.add.text(this._config.width/2, 150, T`You are the champion`, style`Text Red`).setOrigin(0.5);
+		}
 		scene.appear(this);
 	}
 	
 	_createBackButton(x, y) {
-		createButton(this, startSceneFn('MainMenu', this), x, y, 'Back', style.use('Button'));
+		createButton(this, startSceneFn('MainMenu', this), x, y, T`Back`, style`Button`);
 	}
 	
 	_createLevels(x, y) {
@@ -45,15 +49,15 @@ export default class extends Phaser.Scene {
 					++answered;
 				}
 			}
-			let buttonStyle = style.use('Button');
+			let buttonStyle = style`Button`;
 			if ( isCompleted ) {
-				buttonStyle = style.use(buttonStyle, 'Green');
+				buttonStyle = style`${buttonStyle} Green`;
 			}
 			if ( isOpened ) {
-				createButton(this, startSceneFn('Level', this, {level: parseInt(i)}), x, y + gap*i, `Level ${i}`, buttonStyle);
+				createButton(this, startSceneFn('Level', this, {level: parseInt(i)}), x, y + gap*i, T`Level ${i}`, buttonStyle);
 			} else {
-				buttonStyle = style.use(buttonStyle, 'Gray');
-				createButton(this, null, x, y + gap*i, `Level ${i}`, buttonStyle);
+				buttonStyle = style`${buttonStyle} Gray`;
+				createButton(this, null, x, y + gap*i, T`Level ${i}`, buttonStyle);
 			}
 			if ( ! isCompleted ) {
 				isChampion = false;
@@ -62,9 +66,7 @@ export default class extends Phaser.Scene {
 				isOpened = false;
 			}
 		}
-		if ( isChampion ) {
-			this.add.text(this._config.width/2, 125, 'You are the champion', style.use('Title', 'Red')).setOrigin(0.5);
-		}
+		return isChampion;
 	}
 	
 }

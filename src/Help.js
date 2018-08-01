@@ -1,8 +1,9 @@
 import createButton from './createButton.js';
 import sceneScroll from './sceneScroll.js';
-import style from './style.js';
 import scene from './scene.js';
 import startSceneFn from './startSceneFn.js'
+import style from './styleTag.js';
+import T from './i18n.js'
 
 export default class extends Phaser.Scene {
 	
@@ -18,7 +19,7 @@ export default class extends Phaser.Scene {
 			top: 0,
 			bottom: -100
 		});
-		this.add.text(config.width/2, 75, 'HELP', style.use('Title')).setOrigin(0.5);
+		this.add.text(config.width/2, 75, T`HELP`, style`Title`).setOrigin(0.5);
 		this._createBackButton(config.width/2, 200);
 		this._createHelpText(0, 300);
 		this._createBackButton(config.width/2, 500);
@@ -26,15 +27,15 @@ export default class extends Phaser.Scene {
 	}
 	
 	_createBackButton(x, y) {
-		createButton(this, startSceneFn('MainMenu', this), x, y, 'Back', style.use('Button'));
+		createButton(this, startSceneFn('MainMenu', this), x, y, T`Back`, style`Button`);
 	}
 	
 	_createHelpText(x, y) {
 		const helpText = [
-			'Q: I cant',
-			'A: You can'
+			T`Q: Who are developer?`,
+			T`A: Trifle Quad Studio`
 		];
-		this.add.text(x, y, helpText, style.use('Text'));
+		this.add.text(x, y, helpText, style`Text`);
 	}
 	
 }
