@@ -1,3 +1,9 @@
+function merge(...objs) {
+	const result = Object.assign({}, ...objs)
+	delete result.styles;
+	return result;
+}
+
 export default new class {
 	
 	constructor() {
@@ -5,32 +11,33 @@ export default new class {
 	}
 	
 	set(name, obj) {
-		let result = {};
-		if ( obj.style ) {
-			result = this.use(result, obj.style);
-		}
-		this._map.set(name, this._merge(result, obj));
+		this._map.set(name, obj);
 	}
 	
 	use(...styles) {
-		let result = {};
+		let result = {
+			_usedStyles: []
+		};
 		for ( const style of styles ) {
 			if ( Array.isArray(style) ) {
 				result = this.use(result, ...style);
 			} else if ( typeof style === 'string' ) {
-				const styleObj = this._map.get(style);
-				if ( styleObj ) {
-					result = this._merge(result, styleObj);
+				if ( style.includes(' ') ) {
+					result = this.use(result, style.split(' '));
+				} else {
+					if ( ! result._usedStyles.includes(style) ) {
+						result._usedStyles.push(style);
+						result = this.use(result, this._map.get(style));
+					}
 				}
-			} else {
-				result = this._merge(result, style);
+			} else if ( typeof style === 'object' ) {
+				if ( style.styles ) {
+					result = this.use(result, style.styles);
+				}
+				result = merge(result, style);
 			}
 		}
 		return result;
-	}
-	
-	_merge(...objs) {
-		return Object.assign({}, ...objs);
 	}
 	
 }

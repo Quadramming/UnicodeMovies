@@ -1,7 +1,10 @@
+import style from './styleTag.js';
+import T from './i18n.js'
+
 export default class {
 	
 	constructor(scene, x, y) {
-		this._textLimit = 5;
+		this._textLimit = 11;
 		this._scene = scene;
 		this._text = '';
 		this._obj = null;
@@ -12,11 +15,7 @@ export default class {
 	
 	create() {
 		this._text = '';
-		this._obj = this._scene.add.text(this._x, this._y, '', {
-			fontFamily: 'Arial',
-			fontSize: 50,
-			color: '#000000'
-		}).setOrigin(0.5)
+		this._obj = this._scene.add.text(this._x, this._y, '', style`AnswerInput`).setOrigin(0.5)
 	}
 	
 	setOnchange(fn) {

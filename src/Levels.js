@@ -35,7 +35,7 @@ export default class extends Phaser.Scene {
 	}
 	
 	_createLevels(x, y) {
-		const gap = 50;
+		const gap = 60;
 		let isOpened = true;
 		let isChampion = true;
 		for ( const i in movies ) {

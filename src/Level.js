@@ -37,11 +37,12 @@ export default class extends Phaser.Scene {
 	}
 	
 	_createLevel(x, y) {
-		const gap = 50;
+		const gap = 60;
 		for ( const i in movies[this._level] ) {
 			const movie = new Movie(movies[this._level][i]);
 			let textStyle = style`Button Emoji`;
 			if ( movie.isAnswered() ) {
+				//debugger;
 				textStyle = style`${textStyle} Green`;
 			}
 			createButton(

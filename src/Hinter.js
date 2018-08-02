@@ -1,7 +1,8 @@
-import style from './style.js';
 import storage from './storageHandler.js';
 import createButton from './createButton.js';
 import disappear from './disappear.js';
+import style from './styleTag.js';
+import T from './i18n.js'
 
 export default class {
 	
@@ -15,10 +16,10 @@ export default class {
 	
 	create() {
 		const config = this._scene.sys.game.config;
-		this._hintText = this._scene.add.text(config.width/2, 350, '', style.use('Text')).setOrigin(0.5);
+		this._hintText = this._scene.add.text(config.width - 75, 350, T``, style`Text Sized`).setOrigin(0.5);
 		this._setHintText(false);
 		if ( this._isCanHint() ) {
-			this._button = createButton(this._scene, this._getHint.bind(this), 0, 350, this._getUseHintText(), style.use('Button')).setOrigin(0, 0.5);
+			this._button = createButton(this._scene, this._getHint.bind(this), 0, 350, this._getUseHintText(), style`Button`).setOrigin(0, 0.5);
 		}
 	}
 	
@@ -36,7 +37,7 @@ export default class {
 	
 	_getUseHintText() {
 		const hints = storage.getHints();
-		return `Use hint (${hints})`;
+		return T`Use hint (${hints})`;
 	}
 	
 	_getHint(x, y) {
@@ -88,7 +89,7 @@ export default class {
 	
 	_minusHint(x, y) {
 		storage.subHint();
-		const textHints = this._scene.add.text(x, y, '-1', style.use('HintBubble')).setOrigin(0.5);
+		const textHints = this._scene.add.text(x, y, T`-1`, style`HintBubble`).setOrigin(0.5);
 		this._scene.tweens.add({
 			targets: textHints,
 			y: textHints.y - 50,
