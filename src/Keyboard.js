@@ -6,12 +6,18 @@ export default class {
 	constructor(scene) {
 		this._scene = scene;
 		this._keys = [];
-		this._addKeys();
 		this._onKey = () => {};
 		this._startPress = null;
 		this._shift = null;
 		this._holdTimer = 700;
 		this._enabled = true;
+		if ( language === 'RU' ) {
+			this._addKeysRu();
+			this._pngName = 'keyboardRu';
+		} else if ( language === 'EN' ) {
+			this._addKeysEn();
+			this._pngName = 'keyboardEn';
+		}
 	}
 	
 	enable() {
@@ -23,7 +29,7 @@ export default class {
 	}
 	
 	preload() {
-		this._scene.load.image('keyboard', 'assets/keyboard.png');
+		this._scene.load.image('keyboard', `assets/${this._pngName}.png`);
 	}
 	
 	create() {
@@ -60,7 +66,33 @@ export default class {
 		this._onKey = fn;
 	}
 	
-	_addKeys() {
+	_addKeysRu() {
+		this._keys.push(new Key( '1', 60*0, 0, 60, 80, '!' ));
+		this._keys.push(new Key( '2', 60*1, 0, 60, 80 ));
+		this._keys.push(new Key( '3', 60*2, 0, 60, 80 ));
+		this._keys.push(new Key( '4', 60*3, 0, 60, 80 ));
+		this._keys.push(new Key( '5', 60*4, 0, 60, 80 ));
+		this._keys.push(new Key( '6', 60*5, 0, 60, 80 ));
+		this._keys.push(new Key( '7', 60*6, 0, 60, 80 ));
+		this._keys.push(new Key( '8', 60*7, 0, 60, 80 ));
+		this._keys.push(new Key( '9', 60*8, 0, 60, 80 ));
+		this._keys.push(new Key( '0', 60*9, 0, 60, 80, '+' ));
+
+		this._keys.push(new Key( 'Й', 50*0, 80, 50, 80 ));
+		this._keys.push(new Key( 'Ц', 50*1, 80, 50, 80 ));
+		this._keys.push(new Key( 'У', 50*2, 80, 50, 80 ));
+		this._keys.push(new Key( 'К', 50*3, 80, 50, 80 ));
+		this._keys.push(new Key( 'Е', 50*4, 80, 50, 80 ));
+		this._keys.push(new Key( 'Н', 50*5, 80, 50, 80 ));
+		this._keys.push(new Key( 'Г', 50*6, 80, 50, 80 ));
+		this._keys.push(new Key( 'Ш', 50*7, 80, 50, 80 ));
+		this._keys.push(new Key( 'Щ', 50*8, 80, 50, 80 ));
+		this._keys.push(new Key( 'З', 50*9, 80, 50, 80 ));
+		this._keys.push(new Key( 'Х', 50*10, 80, 50, 80 ));
+		this._keys.push(new Key( 'Ъ', 50*11, 80, 50, 80 ));
+	}
+
+	_addKeysEn() {
 		this._keys.push(new Key( '1', 60*0, 0, 60, 80, '!' ));
 		this._keys.push(new Key( '2', 60*1, 0, 60, 80 ));
 		this._keys.push(new Key( '3', 60*2, 0, 60, 80 ));

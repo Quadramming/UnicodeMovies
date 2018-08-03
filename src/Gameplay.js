@@ -39,11 +39,12 @@ export default class extends Phaser.Scene {
 	
 	create() {
 		const config = this.sys.game.config;
-		this._textInput = new TextInput(this, config.width/2, 250);
+		this._textInput = new TextInput(this, config.width/2, 275);
 		this._hinter = new Hinter(this, this._movie);
 		
 		if ( this._answer ) {
-			this.add.text(config.width/2, 250, this._answer, style`AnswerInput`).setOrigin(0.5);
+			const answer = this.add.text(config.width/2, 275, this._answer, style`AnswerInput`).setOrigin(0.5);
+			answer.setScale( Math.min(500/answer.width, 1));
 		}
 		
 		this.add.text(config.width/2, 175, this._movie.getChars(), style`MovieEmoji`).setOrigin(0.5);

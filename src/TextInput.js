@@ -4,7 +4,7 @@ import T from './i18n.js'
 export default class {
 	
 	constructor(scene, x, y) {
-		this._textLimit = 11;
+		this._textLimit = 40;
 		this._scene = scene;
 		this._text = '';
 		this._obj = null;
@@ -15,7 +15,7 @@ export default class {
 	
 	create() {
 		this._text = '';
-		this._obj = this._scene.add.text(this._x, this._y, '', style`AnswerInput`).setOrigin(0.5)
+		this._obj = this._scene.add.text(this._x, this._y, '', style`AnswerInput`).setOrigin(0.5);
 	}
 	
 	setOnchange(fn) {
@@ -42,6 +42,7 @@ export default class {
 		if ( this._onChange ) {
 			this._onChange(this._text);
 		}
+		this._obj.setScale( Math.min(500/this._obj.width, 1));
 	}
 	
 }
