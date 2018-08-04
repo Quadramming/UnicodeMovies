@@ -73,6 +73,8 @@ export default class extends Phaser.Scene {
 			if ( ! this._answer ) {
 				if ( v === 'BACKSPACE' ) {
 					this._textInput.backspace(v);
+				} else if ( v === 'CLEAR' ) {
+					this._textInput.clear();
 				} else {
 					this._textInput.add(v);
 				}

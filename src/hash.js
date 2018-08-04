@@ -10,6 +10,6 @@ function normalize(text) {
 
 export default (text) => {
 	text = normalize(text);
-	const salt = 'CR4MP1N7H3L395p0r71n9';
+	const salt = '9n17r0p593L3H7N1PM4RC';
 	return md5(text + salt);
 }

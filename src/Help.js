@@ -33,7 +33,19 @@ export default class extends Phaser.Scene {
 	_createHelpText(x, y) {
 		const helpText = [
 			T`Q: Who are developer?`,
-			T`A: Trifle Quad Studio`
+			T`A: Trifle Quad Studio`,
+			T`Q: Who are developer?`,
+			T`A: Trifle Quad Studio`,
+			T`Q: Who are developer?`,
+			T`A: Trifle Quad Studio`,
+			T`Q: Who are developer?`,
+			T`A: Trifle Quad Studio`,
+			T`Q: Who are developer?`,
+			T`A: Trifle Quad Studio`,
+			T`Q: Who are developer?`,
+			T`A: Trifle Quad Studio`,
+			T`Q: Who are developer?`,
+			T`A: Trifle Quad Studio`,
 		];
 		this.add.text(x, y, helpText, style`Text`);
 	}

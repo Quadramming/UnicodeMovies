@@ -24,11 +24,11 @@ export default class extends Phaser.Scene {
 			left: 0,
 			right: 0,
 			top: 0,
-			bottom: -100
+			bottom: 0
 		});
 		this.add.text(config.width/2, 75, T`LEVEL ${this._level}`, style`Title`).setOrigin(0.5);
-		this._createBackButton(config.width/2, 200);
-		this._createLevel(config.width/2, 300);
+		this._createBackButton(config.width/2, 150);
+		this._createLevel(config.width/2, 225);
 		scene.appear(this);
 	}
 	
@@ -42,7 +42,6 @@ export default class extends Phaser.Scene {
 			const movie = new Movie(movies[this._level][i]);
 			let textStyle = style`Button Emoji`;
 			if ( movie.isAnswered() ) {
-				//debugger;
 				textStyle = style`${textStyle} Green`;
 			}
 			createButton(

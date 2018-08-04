@@ -37,6 +37,11 @@ export default class {
 		this._updateText();
 	}
 	
+	clear() {
+		this._text = '';
+		this._updateText();
+	}
+	
 	_updateText() {
 		this._obj.setText(this._text);
 		if ( this._onChange ) {

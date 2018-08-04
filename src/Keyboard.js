@@ -67,29 +67,32 @@ export default class {
 	}
 	
 	_addKeysRu() {
-		this._keys.push(new Key( '1', 60*0, 0, 60, 80, '!' ));
-		this._keys.push(new Key( '2', 60*1, 0, 60, 80 ));
-		this._keys.push(new Key( '3', 60*2, 0, 60, 80 ));
-		this._keys.push(new Key( '4', 60*3, 0, 60, 80 ));
-		this._keys.push(new Key( '5', 60*4, 0, 60, 80 ));
-		this._keys.push(new Key( '6', 60*5, 0, 60, 80 ));
-		this._keys.push(new Key( '7', 60*6, 0, 60, 80 ));
-		this._keys.push(new Key( '8', 60*7, 0, 60, 80 ));
-		this._keys.push(new Key( '9', 60*8, 0, 60, 80 ));
-		this._keys.push(new Key( '0', 60*9, 0, 60, 80, '+' ));
-
-		this._keys.push(new Key( 'Й', 50*0, 80, 50, 80 ));
-		this._keys.push(new Key( 'Ц', 50*1, 80, 50, 80 ));
-		this._keys.push(new Key( 'У', 50*2, 80, 50, 80 ));
-		this._keys.push(new Key( 'К', 50*3, 80, 50, 80 ));
-		this._keys.push(new Key( 'Е', 50*4, 80, 50, 80 ));
-		this._keys.push(new Key( 'Н', 50*5, 80, 50, 80 ));
-		this._keys.push(new Key( 'Г', 50*6, 80, 50, 80 ));
-		this._keys.push(new Key( 'Ш', 50*7, 80, 50, 80 ));
-		this._keys.push(new Key( 'Щ', 50*8, 80, 50, 80 ));
-		this._keys.push(new Key( 'З', 50*9, 80, 50, 80 ));
-		this._keys.push(new Key( 'Х', 50*10, 80, 50, 80 ));
-		this._keys.push(new Key( 'Ъ', 50*11, 80, 50, 80 ));
+		const W = 50;
+		const H = 80;
+		
+		let [offsetW, row] = [0, 0];
+		for ( let i = 0; i < 10; ++i ) {
+			this._keys.push(new Key( '1234567890'[i], offsetW+W*i, H*row, W, H ));
+		}
+		this._keys.push(new Key( 'BACKSPACE', offsetW+W*10, H*row, W*2, H, 'CLEAR' ));
+		
+		[offsetW, row] = [0, 1];
+		for ( let i = 0; i < 12; ++i ) {
+			this._keys.push(new Key( 'ЙЦУКЕНГШЩЗХЪ'[i], offsetW+W*i, H*row, W, H ));
+		}
+	
+		[offsetW, row] = [25, 2];
+		for ( let i = 0; i < 11; ++i ) {
+			this._keys.push(new Key( 'ФЫВАПРОЛДЖЭ'[i], offsetW+W*i, H*row, W, H ));
+		}
+		
+		[offsetW, row] = [50, 3];
+		for ( let i = 0; i < 9; ++i ) {
+			this._keys.push(new Key( 'ЯЧСМИТЬБЮ'[i], offsetW+W*i, H*row, W, H ));
+		}
+		
+		[offsetW, row] = [100, 4];
+		this._keys.push(new Key( ' ', offsetW, H*row, W*7, H));
 	}
 
 	_addKeysEn() {

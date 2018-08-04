@@ -62,7 +62,7 @@ export default class extends Phaser.Scene {
 			if ( ! isCompleted ) {
 				isChampion = false;
 			}
-			if ( answered < 1 ) {
+			if ( answered < 8 ) {
 				isOpened = false;
 			}
 		}
