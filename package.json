@@ -7,12 +7,12 @@
     "start": "npm run build && webpack-dev-server --port=8000"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.11.0",
+    "raw-loader": "^0.5.1",
     "webpack": "^3.4.1",
-    "raw-loader": "^0.5.1"
+    "webpack-dev-server": "^2.11.3"
   },
   "dependencies": {
     "md5": "^2.2.1",
-    "phaser": "^3.11.0"
+    "phaser": "^3.12.0"
   }
 }
