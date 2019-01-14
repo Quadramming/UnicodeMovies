@@ -1,13 +1,13 @@
 function clipCamera(camera, clip) {
-	if ( camera.x > clip.right ) {
-		camera.x = clip.right;
-	} else if ( camera.x < clip.left ) {
-		camera.x = clip.left;
+	if ( camera.scrollX > clip.right ) {
+		camera.scrollX = clip.right;
+	} else if ( camera.scrollX  < clip.left ) {
+		camera.scrollX = clip.left;
 	}
-	if ( camera.y > clip.top ) {
-		camera.y = clip.top;
-	} else if ( camera.y < clip.bottom ) {
-		camera.y = clip.bottom;
+	if ( camera.scrollY > clip.top ) {
+		camera.scrollY = clip.top;
+	} else if ( camera.scrollY < clip.bottom ) {
+		camera.scrollY = clip.bottom;
 	}
 }
 
@@ -26,8 +26,8 @@ export default (scene, clip = null) => {
 			return;
 		}
 		if ( p.active ) {
-			camera.x += (pointer.x - p.x);
-			camera.y += (pointer.y - p.y);
+			camera.scrollX -= (pointer.x - p.x);
+			camera.scrollY -= (pointer.y - p.y);
 			if ( clip ) {
 				clipCamera(camera, clip);
 			}
