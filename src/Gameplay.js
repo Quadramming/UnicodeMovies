@@ -47,7 +47,7 @@ export default class extends Phaser.Scene {
 			answer.setScale( Math.min(500/answer.width, 1));
 		}
 		this.add.text(config.width/2, 175, this._movie.getChars(), style`MovieEmoji`).setOrigin(0.5).setPadding({top: 8});
-		this._winEmoji = this.add.text(config.width/2, 175, this._movie.getChars(), style`MovieEmojiDone`).setOrigin(0.5);
+		this._winEmoji = this.add.text(config.width/2, 175, this._movie.getChars(), style`MovieEmojiDone`).setOrigin(0.5).setPadding({top: 8});
 		if ( ! this._answer ) {
 			this._winEmoji.setAlpha(0);
 		}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Preview</title>
+		<meta charset='utf-8'>
+		<style type='text/css'>
+			@font-face {
+				font-family: Noto Emoji;
+				src: url('assets/NotoEmoji-Regular.ttf');
+			}
+			body {
+				font-size: 30px;
+				white-space: nowrap;
+			}
+			.emoji {
+				font-family: Noto Emoji;
+			}
+		</style>
+		<script type='module'>
+			import levels from './src/movies.js';
+			window.addEventListener('load', function(event) {
+				const text = document.body;
+				for ( const level of levels ) {
+					text.innerHTML += '================<br>';
+					for ( const movie of level ) {
+						text.innerHTML += `<span class='emoji'>${movie[0]}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>${movie[1]}</span>&nbsp;&nbsp;|&nbsp;&nbsp;`;
+						for ( const name of movie[2] ) {
+							text.innerHTML += `<span>${name}&nbsp;&nbsp;|&nbsp;&nbsp;</span>`;
+						}
+						text.innerHTML += `<br>`;
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
