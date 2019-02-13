@@ -35,30 +35,30 @@ function create() {
 	const Y = 10;
 	const W = 50;
 	const H = 80;
-	const R = 10; // Round
+	const R = 5; // Round
 	const graphics = this.add.graphics();
 	graphics.lineStyle(2, 0x404040, 1);
 	
 	// RU KEYBOARD
 	for ( let i = 0; i < 10; ++i) {
-			graphics.strokeRoundedRect(X+i*W, Y, W-2, H-2, R);
+			graphics.strokeRoundedRect(X+i*W, Y, W, H, R);
 			this.add.text(X+i*W+30, Y+55, '1234567890'[i], style`Text ${{fontSize: 50}}`).setOrigin(0.5);
 	}
-	graphics.strokeRoundedRect(X+10*W, Y, W*2-2, H-2, R);
-	this.add.text(X+10*W+50, Y+40, `\u2B05`, style`Text ${{fontSize: 75}}`).setOrigin(0.5);
+	graphics.strokeRoundedRect(X+10*W, Y, W*2, H, R);
+	this.add.text(X+10*W+50, Y+45, `\u2B05`, style`Text ${{fontSize: 75}}`).setOrigin(0.5);
 	for ( let i = 0; i < 12; ++i) {
-			graphics.strokeRoundedRect(X+i*W, Y+H*1,  W-2, H-2, R);
+			graphics.strokeRoundedRect(X+i*W, Y+H*1,  W, H, R);
 			this.add.text(X+i*W+25, Y+H*1+40, "ЙЦУКЕНГШЩЗХЪ"[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 	}
 	for ( let i = 0; i < 11; ++i) {
-			graphics.strokeRoundedRect(X+i*W+25, Y+H*2,  W-2, H-2, R);
+			graphics.strokeRoundedRect(X+i*W+25, Y+H*2,  W, H, R);
 			this.add.text(X+i*W+25+25, Y+H*2+40, "ФЫВАПРОЛДЖЭ"[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 	}
-	for ( let i = 0; i < 9; ++i) {
-			graphics.strokeRoundedRect(X+i*W+50, Y+H*3,  W-2, H-2, R);
-			this.add.text(X+i*W+25+50, Y+H*3+40, "ЯЧСМИТЬБЮ"[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
+	for ( let i = 0; i < 10; ++i) {
+			graphics.strokeRoundedRect(X+i*W+50, Y+H*3,  W, H, R);
+			this.add.text(X+i*W+25+50, Y+H*3+40, "ЯЧСМИТЬБЮ-"[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 	}
-	graphics.strokeRoundedRect(X+100, Y+H*4,  W-2+300, H-2, R);
+	graphics.strokeRoundedRect(X+100, Y+H*4,  W*8, H, R);
 }
 
 /*

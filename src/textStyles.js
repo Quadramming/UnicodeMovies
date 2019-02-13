@@ -25,7 +25,7 @@ style.set('Button', {styles: ['Noto', 'ButtonColor', 'Sized']});
 
 style.set('AnswerInput', {styles: ['Noto', 'TextColor', 'Sized']});
 
-style.set('MovieEmoji', { styles: ['Emoji', 'TextColor'], fontSize: 70 });
+style.set('MovieEmoji', { styles: ['Emoji'], fontSize: 70, color: '#404040' });
 style.set('MovieEmojiDone', { styles: ['MovieEmoji', 'Green'] });
 
 style.set('appBackGround', {color: '#F7F7F7', colorInt: 0xF7F7F7, r: 0xF7 , g: 0xF7, b: 0xF7});

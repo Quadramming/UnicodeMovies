@@ -87,14 +87,14 @@ export default class {
 		}
 		
 		[offsetW, row] = [50, 3];
-		for ( let i = 0; i < 9; ++i ) {
-			this._keys.push(new Key( 'ЯЧСМИТЬБЮ'[i], offsetW+W*i, H*row, W, H ));
+		for ( let i = 0; i < 10; ++i ) {
+			this._keys.push(new Key( 'ЯЧСМИТЬБЮ-'[i], offsetW+W*i, H*row, W, H ));
 		}
 		
 		[offsetW, row] = [100, 4];
-		this._keys.push(new Key( ' ', offsetW, H*row, W*7, H));
+		this._keys.push(new Key( ' ', offsetW, H*row, W*8, H));
 	}
-
+	
 	_addKeysEn() {
 		this._keys.push(new Key( '1', 60*0, 0, 60, 80, '!' ));
 		this._keys.push(new Key( '2', 60*1, 0, 60, 80 ));
