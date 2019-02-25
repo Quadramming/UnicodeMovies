@@ -48,17 +48,21 @@ function create() {
 	this.add.text(X+10*W+50, Y+45, `\u2B05`, style`Text ${{fontSize: 75}}`).setOrigin(0.5);
 	for ( let i = 0; i < 12; ++i) {
 			graphics.strokeRoundedRect(X+i*W, Y+H*1,  W, H, R);
-			this.add.text(X+i*W+25, Y+H*1+40, "ЙЦУКЕНГШЩЗХЪ"[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
+			this.add.text(X+i*W+25, Y+H*1+40, 'ЙЦУКЕНГШЩЗХЪ'[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 	}
 	for ( let i = 0; i < 11; ++i) {
 			graphics.strokeRoundedRect(X+i*W+25, Y+H*2,  W, H, R);
-			this.add.text(X+i*W+25+25, Y+H*2+40, "ФЫВАПРОЛДЖЭ"[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
+			this.add.text(X+i*W+25+25, Y+H*2+40, 'ФЫВАПРОЛДЖЭ'[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 	}
 	for ( let i = 0; i < 10; ++i) {
 			graphics.strokeRoundedRect(X+i*W+50, Y+H*3,  W, H, R);
-			this.add.text(X+i*W+25+50, Y+H*3+40, "ЯЧСМИТЬБЮ-"[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
+			this.add.text(X+i*W+25+50, Y+H*3+40, 'ЯЧСМИТЬБЮ-'[i], style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 	}
+	graphics.strokeRoundedRect(X+50, Y+H*4,  W, H, R);
+	this.add.text(X+50+25, Y+H*4+40, ',', style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 	graphics.strokeRoundedRect(X+100, Y+H*4,  W*8, H, R);
+	graphics.strokeRoundedRect(X+100+W*8, Y+H*4,  W, H, R);
+	this.add.text(X+100+W*8+25, Y+H*4+40, '+', style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 }
 
 /*

@@ -18,8 +18,8 @@ export default class extends Phaser.Scene {
 		sceneScroll(this, {
 			left: 0,
 			right: 0,
-			top: 0,
-			bottom: -100
+			top: 150,
+			bottom: 0
 		});
 		this.add.text(this._config.width/2, 75, T`LEVELS`, style`Title`).setOrigin(0.5);
 		this._createBackButton(this._config.width/2, 225);

@@ -92,7 +92,9 @@ export default class {
 		}
 		
 		[offsetW, row] = [100, 4];
+		this._keys.push(new Key( ',', offsetW-W, H*row, W, H));
 		this._keys.push(new Key( ' ', offsetW, H*row, W*8, H));
+		this._keys.push(new Key( '+', offsetW+W*8, H*row, W, H));
 	}
 	
 	_addKeysEn() {
