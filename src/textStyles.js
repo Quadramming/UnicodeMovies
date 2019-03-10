@@ -16,7 +16,7 @@ style.set('Red', {color: '#FF0000'});
 style.set('Gray', {color: '#aaaaaa'});
 
 style.set('Big', {fontSize: 100});
-style.set('Sized', {fontSize: 55});
+style.set('Sized', {fontSize: 50});
 
 style.set('Title', {styles: ['Noto', 'TextColor'], fontSize: 64});
 style.set('HintBubble', {styles: ['Noto', 'LightColor', {fontSize: 40}]});

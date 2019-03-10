@@ -78,7 +78,15 @@ export default class {
 		
 		[offsetW, row] = [0, 1];
 		for ( let i = 0; i < 12; ++i ) {
-			this._keys.push(new Key( 'ЙЦУКЕНГШЩЗХЪ'[i], offsetW+W*i, H*row, W, H ));
+			const cKey = 'ЙЦУКЕНГШЩЗХЪ'[i];
+			this._keys.push(new Key( cKey, offsetW+W*i, H*row, W, H ));
+			/*
+			if ( cKey === 'Е' ) {
+				this._keys.push(new Key( cKey, offsetW+W*i, H*row, W, H, 'Ё' ));
+			} else {
+				this._keys.push(new Key( cKey, offsetW+W*i, H*row, W, H ));
+			}
+			*/
 		}
 	
 		[offsetW, row] = [25, 2];
@@ -87,8 +95,8 @@ export default class {
 		}
 		
 		[offsetW, row] = [50, 3];
-		for ( let i = 0; i < 10; ++i ) {
-			this._keys.push(new Key( 'ЯЧСМИТЬБЮ-'[i], offsetW+W*i, H*row, W, H ));
+		for ( let i = 0; i < 11; ++i ) {
+			this._keys.push(new Key( 'ЯЧСМИТЬБЮ-:'[i], offsetW+W*i, H*row, W, H ));
 		}
 		
 		[offsetW, row] = [100, 4];

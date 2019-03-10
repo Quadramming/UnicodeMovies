@@ -15,3 +15,7 @@ build/
 
 # Assets
 assets/
+
+# Misc
+src/original_movies.js
+src/movies.js
