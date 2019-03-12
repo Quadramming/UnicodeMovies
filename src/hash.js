@@ -4,6 +4,9 @@ function normalize(text) {
 	text = text.toLowerCase();
 	text = text.replace(/^the |^a /g, '');
 	text = text.replace(/( a | the )/g, ' ');
+	text = text.replace(/ \- /g, '-');
+	text = text.replace(/ \+ /g, '+');
+	text = text.replace(/ \:/g, ':');
 	text = text.replace(/[^0-9a-zа-яё\,\:\-\ \+]/g, '');
 	return text;
 }

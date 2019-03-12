@@ -14,4 +14,12 @@ export default new Map([
 	['You are the champion', 'Вы - чемпион'],
 	['Q: Who are developer?', 'В: Кто разработчик?'],
 	['A: Trifle Quad Studio', 'О: Trifle Quad Studio'],
+	['HELP TEXT',
+		'В: Что здесь может быть?\n'+
+		'О: Фильмы, мультфильмы, \nсериалы и всё аналогичное.\n\n'+
+		'В: Что зашифровано?\n'+
+		'О: В основном - название,\nно иногда необходимо \nзнать сюжет.\n\n'+
+		'В: Кто разработчик?\n'+
+		'О: Trifle Quad Studio'
+	],
 ])

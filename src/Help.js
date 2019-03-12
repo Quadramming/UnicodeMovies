@@ -16,13 +16,13 @@ export default class extends Phaser.Scene {
 		sceneScroll(this, {
 			left: 0,
 			right: 0,
-			top: 100,
+			top: 150,
 			bottom: 0
 		});
 		this.add.text(config.width/2, 75, T`HELP`, style`Title`).setOrigin(0.5);
 		this._createBackButton(config.width/2, 200);
-		this._createHelpText(0, 300);
-		this._createBackButton(config.width/2, 500);
+		this._createHelpText(20, 300);
+		this._createBackButton(config.width/2, 900);
 		scene.appear(this);
 	}
 	
@@ -32,8 +32,7 @@ export default class extends Phaser.Scene {
 	
 	_createHelpText(x, y) {
 		const helpText = [
-			T`Q: Who are developer?`,
-			T`A: Trifle Quad Studio`
+			T`HELP TEXT`,
 		];
 		this.add.text(x, y, helpText, style`Text`);
 	}
