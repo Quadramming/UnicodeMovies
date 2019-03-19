@@ -1,6 +1,7 @@
 import Storage from './Storage.js';
 
 const storage = new Storage();
+const defaultHints = 7;
 
 export default {
 	
@@ -15,7 +16,7 @@ export default {
 	},
 	
 	getHints() {
-		return storage.getNumber('Hints', 0);
+		return storage.getNumber('Hints', defaultHints);
 	},
 	
 	addHints(n) {

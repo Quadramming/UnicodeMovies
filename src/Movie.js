@@ -1,5 +1,6 @@
 import hash from './hash.js';
 import storage from './storageHandler.js';
+import md5 from 'md5';
 
 export default class {
 	
@@ -11,7 +12,7 @@ export default class {
 			this.titles.push(title);
 		}
 		this.year = year;
-		this.id = hash(id);
+		this.id = md5(id);
 	}
 	
 	isAnswered() {

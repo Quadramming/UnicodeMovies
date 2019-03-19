@@ -7,6 +7,8 @@ import startSceneFn from './startSceneFn.js'
 import style from './styleTag.js';
 import T from './i18n.js'
 
+const answersNeeded = 8;
+
 export default class extends Phaser.Scene {
 	
 	constructor() {
@@ -62,7 +64,7 @@ export default class extends Phaser.Scene {
 			if ( ! isCompleted ) {
 				isChampion = false;
 			}
-			if ( answered < 8 ) {
+			if ( answered < answersNeeded ) {
 				isOpened = false;
 			}
 		}
