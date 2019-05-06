@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>What movie is hidden in emojis</title>
 		<meta charset='utf-8'>
-		<meta name='viewport' id='viewport' content='width=600, user-scalable=no'>
-		<link rel='stylesheet' href='css/style.css' type='text/css' media='screen'>
+		<meta name='format-detection' content='telephone=no'>
+		<meta name='msapplication-tap-highlight' content='no'>
+		<meta name='viewport' id='viewport' content='width=600, viewport-fit=cover, user-scalable=no'>
+		<link rel='stylesheet' href='css/style.css' type='text/css'>
 	</head>
 	<body>
-		<script src='build/project.bundle.js' charset='utf-8'></script>
+		<div id='mainDiv' style='display: none'></div>
+		<script type='text/javascript' src='cordova.js'></script>
+		<script type='text/javascript' src='build/project.bundle.js' charset='utf-8'></script>
 		<div class='fontLoader' style='font-family: Noto Sans'>Font Loader</div>
 		<div class='fontLoader' style='font-family: Noto Emoji'>Font Loader</div>
 	</body>

@@ -13,7 +13,7 @@ style.set('LightColor', {color: '#A4A4A4'}); // Light text
 
 style.set('Green', {color: '#819B4D'});
 style.set('Red', {color: '#FF0000'});
-style.set('Gray', {color: '#aaaaaa'});
+style.set('Gray', {color: '#AAAAAA'});
 
 style.set('Big', {fontSize: 100});
 style.set('Sized', {fontSize: 50});

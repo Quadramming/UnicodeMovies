@@ -1,0 +1,20 @@
+npm run build
+
+rm -rf cordova/www
+mkdir cordova/www
+
+cp index.html cordova/www/
+cp -r assets cordova/www/assets
+cp -r css cordova/www/css
+cp -r build cordova/www/build
+
+pushd cordova
+cordova build android --verbose
+cordova build android --verbose --release
+popd
+
+rm ready/app-release-unsigned.apk
+rm ready/app-debug.apk
+
+cp cordova/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk ready
+cp cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk ready

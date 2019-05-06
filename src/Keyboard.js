@@ -94,10 +94,11 @@ export default class {
 			this._keys.push(new Key( 'ФЫВАПРОЛДЖЭ'[i], offsetW+W*i, H*row, W, H ));
 		}
 		
-		[offsetW, row] = [50, 3];
+		[offsetW, row] = [0, 3];
 		for ( let i = 0; i < 11; ++i ) {
-			this._keys.push(new Key( 'ЯЧСМИТЬБЮ-:'[i], offsetW+W*i, H*row, W, H ));
+			this._keys.push(new Key( ':ЯЧСМИТЬБЮ-'[i], offsetW+W*i, H*row, W, H ));
 		}
+		this._keys.push(new Key( 'BACKSPACE', offsetW+W*11, H*row, W, H, 'CLEAR' ));
 		
 		[offsetW, row] = [100, 4];
 		this._keys.push(new Key( ',', offsetW-W, H*row, W, H));

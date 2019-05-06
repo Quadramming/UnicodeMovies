@@ -19,3 +19,7 @@ assets/
 # Misc
 src/original_movies.js
 src/movies.js
+
+cordova
+ready/app-debug.apk
+ready/app-release-unsigned.apk

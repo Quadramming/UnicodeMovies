@@ -9,8 +9,6 @@ export default class extends Phaser.Scene {
 	}
 	
 	create() {
-		this.cameras.main.setBackgroundColor('#000000');
-		
 		const config = this.sys.game.config;
 		const logo = this.add.sprite(config.width/2, config.height/2, 'logo');
 		logo.setScale(0.3, 0.3);
@@ -19,7 +17,7 @@ export default class extends Phaser.Scene {
 			targets: logo,
 			alpha: 1,
 			ease: 'Expo.easeOut',
-			duration: 100, // 1000,
+			duration: 1000,
 			yoyo: true,
 			onComplete: () => {
 				this.scene.start('MainMenu');

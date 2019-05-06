@@ -9,5 +9,11 @@
 }
 
 .fontLoader {
-	color: #FFFFFF
+}
+
+body {
+	color: #B6B6B6;
+	background-color: #B6B6B6;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
 }
