@@ -20,7 +20,7 @@ export default {
 	},
 	
 	addHints(n) {
-		storage.set('Hints', Math.min( this.getHints() + n, 10) );
+		storage.set('Hints', Math.min( this.getHints() + n, 99) );
 	},
 	
 	subHint() {

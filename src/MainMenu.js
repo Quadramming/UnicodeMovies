@@ -14,6 +14,10 @@ export default class extends Phaser.Scene {
 		this._hintButton = null;
 	}
 	
+	onBackButton() {
+		navigator.app.exitApp();
+	}
+	
 	create() {
 		this._config = this.sys.game.config;
 		this.add.text(this._config.width/2, 75, T`UNICODE MOVIES`, style`Title`).setOrigin(0.5);
@@ -22,19 +26,21 @@ export default class extends Phaser.Scene {
 		const yStart = 250;
 		createButton(this, startSceneFn('Levels', this), this._config.width/2, yStart+gap*(i++), T`Start`, style`Button`);
 		createButton(this, startSceneFn('Help', this), this._config.width/2, yStart+gap*(i++), T`Help`, style`Button`);
-		createButton(this, () => { c('EXIT'); }, this._config.width/2, yStart+gap*(i++), T`Exit`, style`Button`);
+		createButton(this, () => {
+			navigator.app.exitApp();
+		}, this._config.width/2, yStart+gap*(i++), T`Exit`, style`Button`);
 		this._showHints();
 		scene.appear(this);
 	}
 	
 	_showHints() {
-		const hintInterval = 3600*4; // 1;
+		const hintInterval = 3600*4;
 		const now = Date.now();
 		const lastEntrance = storage.getLastEntrance();
 		const timeDiff = (now - lastEntrance) / 1000;
 		if ( timeDiff > hintInterval ) {
 			let hints = Math.floor( timeDiff / hintInterval );
-			hints = Math.min(hints, 10);
+			hints = Math.min(hints, 6);
 			this._hintButton = createButton(this, this._onGetHintsButton.bind(this, hints), this._config.width/2, 600, T`Get hints`, style`Button`);
 		}
 	}

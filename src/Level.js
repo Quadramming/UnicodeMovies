@@ -14,6 +14,10 @@ export default class extends Phaser.Scene {
 		this._level = null;
 	}
 	
+	onBackButton() {
+		startSceneFn('Levels', this)();
+	}
+	
 	init(data) {
 		this._level = data.level;
 	}

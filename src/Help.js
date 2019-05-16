@@ -26,6 +26,10 @@ export default class extends Phaser.Scene {
 		scene.appear(this);
 	}
 	
+	onBackButton() {
+		startSceneFn('MainMenu', this)();
+	}
+	
 	_createBackButton(x, y) {
 		createButton(this, startSceneFn('MainMenu', this), x, y, T`Back`, style`Button`);
 	}

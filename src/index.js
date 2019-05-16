@@ -82,19 +82,25 @@ function create() {
 	this.add.text(X+100+W*8+25, Y+H*4+40, '+', style`Text ${{fontSize: 40}}`).setOrigin(0.5);
 }
 
-/*
-window.addEventListener('resize', (event) => {
-	if ( game ) {
-		const canvas = game.canvas;
-		const w = game.config.width;
-		const h = game.config.height;
-		canvas.style.left = (window.innerWidth/2 - w/2) + 'px';
-		canvas.style.top  = (window.innerHeight/2 - h/2) + 'px';
-	}
-}, false);
-*/
-
 window.addEventListener('load', () => {
+	if ( window.cordova ) {
+		document.addEventListener('deviceready', initApplication, false);
+	} else {
+		initApplication();
+	}
+});
+
+function onBackButton(game) {
+	const scenes = game.scene.getScenes();
+	if ( scenes.length > 0 ) {
+		if ( scenes[0].onBackButton ) {
+			scenes[0].onBackButton();
+		}
+	}
+}
+
+const initApplication = () => {
 	deleteFontLoaders();
 	game = new Phaser.Game(config);
-});
+	document.addEventListener('backbutton', onBackButton.bind(null, game), false);
+};

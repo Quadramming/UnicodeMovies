@@ -15,6 +15,10 @@ export default class extends Phaser.Scene {
 		super('Levels');
 	}
 	
+	onBackButton() {
+		startSceneFn('MainMenu', this)();
+	}
+	
 	create() {
 		this._config = this.sys.game.config;
 		sceneScroll(this, {

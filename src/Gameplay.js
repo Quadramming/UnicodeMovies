@@ -37,6 +37,10 @@ export default class extends Phaser.Scene {
 		this._keyboard.preload();
 	}
 	
+	onBackButton() {
+		startSceneFn('Level', this)();
+	}
+	
 	create() {
 		const config = this.sys.game.config;
 		this._textInput = new TextInput(this, config.width/2, 275);
