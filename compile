@@ -19,3 +19,8 @@ rm ready/app-debug.apk
 
 cp cordova/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk ready
 cp cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk ready
+
+pushd ready
+/Users/creature/Android/build-tools/28.0.3/zipalign -p 4 app-release-unsigned.apk app-release-unsigned-aligned.apk
+/Users/creature/Android/build-tools/28.0.3/apksigner sign --ks my.keystore app-release-unsigned-aligned.apk
+popd
